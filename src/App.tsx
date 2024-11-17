@@ -27,8 +27,8 @@ function App() {
   const changeKey = (event: React.ChangeEvent<HTMLSelectElement>) => { 
     setKey(event.target.value)
   }
-
-  console.log(Object.keys(scales).forEach(key => console.log(key)));
+  let scaleNotes = scales[selectedScale].map(note => keys[(note - 1 + keys.indexOf(key)) % keys.length]);
+  console.log(scaleNotes);
   return (
     <>
       <div>
