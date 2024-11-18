@@ -2,12 +2,19 @@ import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import NotesInScale from './NotesInScale'
+
+type Scale = {
+  name: string
+  notes: number[]
+}
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [scales, setScales] = useState<string[]>([])
-  const [selectedScale, setSelectedScale] = useState<string>('')
-  const [key, setKey] = useState<string>('')
+  const [scales, setScales] = useState<Scale[]>([])
+  const [selectedScale, setSelectedScale] = useState<string>('major')
+  const [key, setKey] = useState<string>('C')
 
   const keys = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 
@@ -15,7 +22,8 @@ function App() {
     fetch('/theory.json')
       .then(response => response.json())
       .then(data => {
-        setScales(data.scales)
+        handleLoadScales(data.scales)
+        // setScales(data.scales)
       })
       .catch(error => console.error('Error loading scales:', error))
   }, [])
@@ -27,8 +35,24 @@ function App() {
   const changeKey = (event: React.ChangeEvent<HTMLSelectElement>) => { 
     setKey(event.target.value)
   }
-  let scaleNotes = scales[selectedScale].map(note => keys[(note - 1 + keys.indexOf(key)) % keys.length]);
-  console.log(scaleNotes);
+
+  function handleLoadScales(data: any) {
+    const temp: Scale[] = Object.entries(data).map((key) => {
+      return {
+        name: key[0],
+        notes: key[1]
+      };
+    });
+    setScales(temp);
+}
+
+  function getScaleNotes(intervals: number[], key) {
+    return intervals.map(note => keys[(note - 1 + keys.indexOf(key)) % keys.length]);
+  } 
+
+  const currentIntervals = scales.find(scale => scale.name === selectedScale)?.notes || [];
+
+  const scaleNotes = getScaleNotes(currentIntervals, key);
   return (
     <>
       <div>
@@ -40,10 +64,8 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+      <NotesInScale notes={scaleNotes} />
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
         <select value={key} onChange={changeKey} title="select key">
           {keys.map((key) => (
             <option key={key} value={key}>
@@ -52,9 +74,9 @@ function App() {
           ))}
         </select>
         <select value={selectedScale} onChange={handleScaleChange} title="select scale">
-          {Object.keys(scales).map((scale) => (
-            <option key={scale} value={scale}>
-              {scale}
+          {Object.entries(scales).map((key, value) => (
+            <option key={key[1].name} value={key[1].name}>
+              {key[1].name}
             </option>
           ))}
         </select>
