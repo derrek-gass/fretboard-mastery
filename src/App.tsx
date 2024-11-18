@@ -23,7 +23,6 @@ function App() {
       .then(response => response.json())
       .then(data => {
         handleLoadScales(data.scales)
-        // setScales(data.scales)
       })
       .catch(error => console.error('Error loading scales:', error))
   }, [])
@@ -63,7 +62,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Scale Builder</h1>
       <NotesInScale notes={scaleNotes} />
       <div className="card">
         <select value={key} onChange={changeKey} title="select key">
@@ -80,13 +79,7 @@ function App() {
             </option>
           ))}
         </select>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
