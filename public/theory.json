@@ -11,6 +11,15 @@
   "melodic minor": [1, 3, 4, 6, 8, 10, 12],
   "melodic minor second mode": [1, 2, 4, 6, 8, 10, 11],
   "lydian augmented": [1, 3, 5, 7, 9, 10, 12],
-  "lydian dominant": [1, 3, 5, 7, 8, 10, 11]
+  "lydian dominant": [1, 3, 5, 7, 8, 10, 11],
+  "melodic minor fifth mode": [1, 3, 4, 6, 8, 10, 12],
+  "locrian #2": [1, 3, 4, 6, 7, 9, 11],
+  "major pentatonic": [1, 3, 5, 8, 10],
+  "locrian major": [1, 3, 5, 6, 7, 9, 11],
+  "altered": [1, 2, 4, 5, 7, 9, 11],
+  "lydian pentatonic": [1, 5, 7, 8, 12],
+  "mixolydian pentatonic": [1, 5, 6, 8, 11],
+  "locrian pentatonic": [1, 4, 6, 7, 11],
+  "minor pentatonic": [1, 4, 6, 8, 11]
   }
 }
