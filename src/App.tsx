@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import NotesInScale from './NotesInScale'
+import GuitarString from './GuitarString'
 
 type Scale = {
   name: string
@@ -17,6 +18,8 @@ function App() {
   const [key, setKey] = useState<string>('C')
 
   const keys = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+
+  const tuning = ['E', 'B', 'E', 'A', 'D', 'G', 'B', 'E']
 
   useEffect(() => {
     fetch('/theory.json')
@@ -57,9 +60,10 @@ function App() {
       <div>
       </div>
       <h1>Scale Builder</h1>
-      <NotesInScale notes={scaleNotes} />
-      <div className="card">
-        <select value={key} onChange={changeKey} title="select key">
+
+      {tuning.reverse().map((string) => (<GuitarString notes={scaleNotes} keys={keys} string={string} />))}
+      <div className="card" style={{margin: "10px"}}>
+        <select value={key} onChange={changeKey} title="select key" style={{marginBottom: "20px"}}>
           {keys.map((key) => (
             <option key={key} value={key}>
               {key}
@@ -73,6 +77,7 @@ function App() {
             </option>
           ))}
         </select>
+          <NotesInScale notes={scaleNotes} />
       </div>
     </>
   )
