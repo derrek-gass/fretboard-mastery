@@ -27,7 +27,7 @@ function GuitarString(props: { notes: string[], keys: string[], string: string, 
 
     return (
       <>
-        <div style={{justifyContent: "center", display: "flex", textAlign: "center", backgroundColor: "#f5ece4"}}>
+        <div style={{justifyContent: "center", display: "flex", textAlign: "center", backgroundColor: "#af8b5e"}}>
           {buildScaleForString(string, frets)}
         </div>
       </>
