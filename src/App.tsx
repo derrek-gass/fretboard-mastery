@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import NotesInScale from './NotesInScale'
 import GuitarString from './GuitarString'
@@ -56,10 +54,12 @@ function App() {
   const currentIntervals = scales.find(scale => scale.name === selectedScale)?.notes || [];
 
   const scaleNotes = getScaleNotes(currentIntervals, key);
+
+  const settings = {scaleNotes, key, changeKey, selectedScale, keys, tuning};
   return (
     <>
       <h1>Scale Builder</h1>
-        <Settings />
+        <Settings props={settings}/>
         {tuning.reverse().map((string) => (<GuitarString notes={scaleNotes} keys={keys} string={string} />))}
         <div className="card" style={{margin: "10px"}}>
           <select value={key} onChange={changeKey} title="select key" style={{marginBottom: "20px"}}>
