@@ -58,7 +58,7 @@ function App() {
   const settings = {scaleNotes, key, changeKey, selectedScale, keys, tuning};
   return (
     <>
-      <h1>Scale Builder</h1>
+      <h1>Fretboard Friend</h1>
         <Settings props={settings}/>
         {tuning.reverse().map((string) => (<GuitarString notes={scaleNotes} keys={keys} string={string} />))}
         <div className="card" style={{margin: "10px"}}>
