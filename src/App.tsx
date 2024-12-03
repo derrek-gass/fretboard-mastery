@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import NotesInScale from './NotesInScale'
 import GuitarString from './GuitarString'
+import Settings from './Settings'
 
 type Scale = {
   name: string
@@ -57,28 +58,27 @@ function App() {
   const scaleNotes = getScaleNotes(currentIntervals, key);
   return (
     <>
-      <div>
-      </div>
       <h1>Scale Builder</h1>
+        <Settings />
+        {tuning.reverse().map((string) => (<GuitarString notes={scaleNotes} keys={keys} string={string} />))}
+        <div className="card" style={{margin: "10px"}}>
+          <select value={key} onChange={changeKey} title="select key" style={{marginBottom: "20px"}}>
+            {keys.map((key) => (
+              <option key={key} value={key}>
+                {key}
+              </option>
+            ))}
+          </select>
+          <select value={selectedScale} onChange={handleScaleChange} title="select scale">
+            {Object.entries(scales).map((key, value) => (
+              <option key={key[1].name} value={key[1].name}>
+                {key[1].name}
+              </option>
+            ))}
+          </select>
+            <NotesInScale notes={scaleNotes} />
+        </div>
 
-      {tuning.reverse().map((string) => (<GuitarString notes={scaleNotes} keys={keys} string={string} />))}
-      <div className="card" style={{margin: "10px"}}>
-        <select value={key} onChange={changeKey} title="select key" style={{marginBottom: "20px"}}>
-          {keys.map((key) => (
-            <option key={key} value={key}>
-              {key}
-            </option>
-          ))}
-        </select>
-        <select value={selectedScale} onChange={handleScaleChange} title="select scale">
-          {Object.entries(scales).map((key, value) => (
-            <option key={key[1].name} value={key[1].name}>
-              {key[1].name}
-            </option>
-          ))}
-        </select>
-          <NotesInScale notes={scaleNotes} />
-      </div>
     </>
   )
 }
