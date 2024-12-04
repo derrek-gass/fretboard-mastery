@@ -15,7 +15,7 @@ export default function Palette() {
     <>
       <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
         {Object.entries(swatches).map(([degree, color]) => (
-          <Button key={degree} style={{backgroundColor: color, width: "25px", minWidth: "25px", height: "25px", display: "flex", justifyContent: "center", alignItems: "center", border: "1px solid black", margin: "1px"}}>
+          <Button key={degree} style={{textTransform: "none", backgroundColor: color, width: "25px", minWidth: "25px", height: "25px", display: "flex", justifyContent: "center", alignItems: "center", border: "1px solid black", margin: "1px"}}>
             {degree}
           </Button>
         ))}
