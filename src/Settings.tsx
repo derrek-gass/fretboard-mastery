@@ -11,6 +11,8 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import KeySlider from './KeySlider';
+import SwatchPicker from './SwatchPicker';
+import Palette from './Palette';
 
 export default function Settings(props) {
   const {key, keys, changeKey, scaleNostes, selectedScale, tuning} = props.props;
@@ -21,14 +23,14 @@ export default function Settings(props) {
   };
 
   const DrawerList = (
-    <Box sx={{ width: 350 }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 350 }} role="presentation" style={{margin: "0 auto", display: "flex", justifyContent: "center"}}>
       <List>
         <ListItem key="KeySelect" disablePadding>
           <ListItemButton>
             <KeySlider props={{key, changeKey, keys}} />
           </ListItemButton>
         </ListItem>
-        {['Scale', 'Palette'].map((text, index) => (
+        {['Scale'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -38,14 +40,17 @@ export default function Settings(props) {
             </ListItemButton>
           </ListItem>
         ))}
+        <ListItem key="paletteSelect" disablePadding>
+            <Palette />
+        </ListItem>   
       </List>
       <Divider />
     </Box>
   );
 
   return (
-    <div style={{position: "absolute", top: 25, right: 25}}>
-      <Button onClick={toggleDrawer(true)}>&#9776;</Button>
+    <div style={{position: "absolute", top: 25, right: 0, marginRight: "25px"}}>
+      <Button onClick={toggleDrawer(true)} style={{fontSize: "24px"}}>&#9776;</Button>
       <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
         {DrawerList}
       </Drawer>
