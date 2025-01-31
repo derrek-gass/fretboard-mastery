@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import NotesInScale from './NotesInScale'
+import ScaleIntervals from './ScaleIntervals'
 import GuitarString from './GuitarString'
 import Settings from './Settings'
 
@@ -55,6 +56,8 @@ function App() {
 
   const scaleNotes = getScaleNotes(currentIntervals, key);
 
+  console.log(currentIntervals);
+
   const settings = {scaleNotes, key, changeKey, selectedScale, keys, tuning};
   return (
     <>
@@ -77,6 +80,7 @@ function App() {
             ))}
           </select>
             <NotesInScale notes={scaleNotes} />
+            <ScaleIntervals intervals={currentIntervals} />
         </div>
 
     </>
